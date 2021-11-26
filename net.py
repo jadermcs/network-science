@@ -2,8 +2,8 @@ import re
 import csv
 import json
 import networkx as nx
-from networkx.algorithms import bipartite
 import matplotlib.pyplot as plt
+from collections import Counter
 
 with open("ancestry.json") as fin:
     mapping = json.load(fin)
@@ -39,7 +39,11 @@ def main():
     nx.draw(g, pos=pos, with_labels=False, width=.25, edge_color=(0,0,0,.25))
     plt.title("Bipartite graph of Communities and Studied Diseases")
     plt.savefig("bipartite.png", dpi=300, transparent=True)
+    plt.show()
     print(g)
+    n, bins, p = plt.hist([d[1] for d in g.degree()], density=True, histtype='stepfilled')
+    print(n)
+    plt.show()
 
 if __name__ == "__main__":
     main()
