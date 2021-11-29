@@ -40,6 +40,8 @@ def main():
     print(nx.average_shortest_path_length(g))
     print("Average clustering")
     print(nx.average_clustering(g))
+    print("Degree correlation")
+    print(nx.degree_pearson_correlation_coefficient(g))
     # Plot distribution statistics
     counter = defaultdict(int)
     for d in g.degree():
