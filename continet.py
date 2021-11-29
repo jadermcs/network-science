@@ -66,6 +66,20 @@ def main():
     plt.title("Bipartite graph of Continents and Studied Diseases")
     plt.savefig("continent-bipartite.png", dpi=300, transparent=True)
     plt.show()
+    # Robustness
+    components = []
+    for i in range(1000):
+        comps = nx.number_connected_components(g)
+        components.append(comps)
+        max_node = max(list(g.degree()), key=lambda x: x[1])[0]
+        g.remove_node(max_node)
+    plt.title("Number of components after remove N nodes")
+    plt.xlabel("N# of nodes removed")
+    plt.ylabel("N# of components")
+    plt.plot(range(len(components)), components, '^k:')
+    plt.savefig("components.png", dpi=300, transparent=True)
+    plt.show()
+
 
 if __name__ == "__main__":
     main()
